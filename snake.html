@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Snake Game | Mini Games Hub</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* Snake page */
+        .snake-page {
+            min-height: 100vh;
+            padding: 90px 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .snake-container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .snake-container h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .snake-container > p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .score-box {
+            min-width: 130px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .score-box span {
+            display: block;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .score-box strong {
+            font-size: 25px;
+        }
+
+        #game-canvas {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            display: block;
+            margin: auto;
+            background: #111827;
+            border: 5px solid #7c3aed;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .game-status {
+            min-height: 30px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .restart-button {
+            border: none;
+            padding: 14px 25px;
+            background: #7c3aed;
+            color: white;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .restart-button:hover {
+            transform: translateY(-2px);
+            background: #5b21b6;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        /* Mobile controls */
+        .mobile-controls {
+            width: 220px;
+            margin: 25px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 65px);
+            grid-template-rows: repeat(2, 65px);
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .control-button {
+            border: none;
+            border-radius: 15px;
+            background: #7c3aed;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .control-button:active {
+            transform: scale(0.92);
+            background: #5b21b6;
+        }
+
+        .up-button {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .left-button {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .down-button {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .right-button {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        .controls-help {
+            color: #64748b;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Dark mode */
+        body.dark .score-box {
+            background: #1e293b;
+        }
+
+        body.dark .score-box span,
+        body.dark .snake-container > p,
+        body.dark .controls-help {
+            color: #94a3b8;
+        }
+
+        /* Small screens */
+        @media (max-width: 550px) {
+            .snake-page {
+                padding: 70px 12px 40px;
+            }
+
+            .snake-container h1 {
+                font-size: 35px;
+            }
+
+            .score-box {
+                min-width: 110px;
+                padding: 12px;
+            }
+
+            .mobile-controls {
+                width: 210px;
+                grid-template-columns: repeat(3, 60px);
+                grid-template-rows: repeat(2, 60px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="snake-page">
+
+        <div class="snake-container">
+
+            <h1>🐍 Snake</h1>
+
+            <p>
+                Eat the food, grow longer, and beat your high score!
+            </p>
+
+            <!-- Score -->
+            <div class="score-board">
+
+                <div class="score-box">
+                    <span>Score</span>
+                    <strong id="score">0</strong>
+                </div>
+
+                <div class="score-box">
+                    <span>High Score</span>
+                    <strong id="high-score">0</strong>
+                </div>
+
+            </div>
+
+            <!-- Game -->
+            <canvas id="game-canvas" width="500" height="500"></canvas>
+
+            <!-- Status -->
+            <div id="game-status" class="game-status">
+                Use the arrow keys to start!
+            </div>
+
+            <!-- Restart -->
+            <button id="restart-button" class="restart-button">
+                🔄 Restart Game
+            </button>
+
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+
+                <button
+                    class="control-button up-button"
+                    data-direction="up"
+                    aria-label="Move Up">
+                    ⬆️
+                </button>
+
+                <button
+                    class="control-button left-button"
+                    data-direction="left"
+                    aria-label="Move Left">
+                    ⬅️
+                </button>
+
+                <button
+                    class="control-button down-button"
+                    data-direction="down"
+                    aria-label="Move Down">
+                    ⬇️
+                </button>
+
+                <button
+                    class="control-button right-button"
+                    data-direction="right"
+                    aria-label="Move Right">
+                    ➡️
+                </button>
+
+            </div>
+
+            <p class="controls-help">
+                💻 Keyboard: Arrow Keys or WASD<br>
+                📱 Mobile: Use the buttons above
+            </p>
+
+            <a href="../index.html" class="back-button">
+                ← Back to Mini Games Hub
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="snake.js"></script>
+
+</body>
+</html>

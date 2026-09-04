@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Memory Game | Mini Games Hub</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .memory-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .memory-page h1 {
+            margin-bottom: 10px;
+        }
+
+        .memory-subtitle {
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .memory-stats {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .memory-stat {
+            min-width: 120px;
+            padding: 14px 18px;
+            border-radius: 14px;
+            background: var(--card-bg, #f1f1f1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .memory-stat strong {
+            display: block;
+            font-size: 22px;
+            margin-top: 4px;
+        }
+
+        .memory-board {
+            width: min(520px, 100%);
+            margin: 0 auto 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 15px;
+            background: #333;
+            cursor: pointer;
+            font-size: clamp(28px, 7vw, 48px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s, background 0.25s;
+            color: transparent;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+        }
+
+        .memory-card:hover {
+            transform: scale(1.04);
+        }
+
+        .memory-card.flipped,
+        .memory-card.matched {
+            background: #ffffff;
+            color: #222;
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            cursor: default;
+            opacity: 0.8;
+        }
+
+        .memory-card:disabled {
+            cursor: default;
+        }
+
+        .memory-message {
+            min-height: 30px;
+            margin: 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .memory-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .memory-button {
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            background: #333;
+            color: white;
+            transition: transform 0.2s;
+        }
+
+        .memory-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .memory-back {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 500px) {
+            .memory-board {
+                gap: 8px;
+            }
+
+            .memory-card {
+                border-radius: 10px;
+            }
+
+            .memory-stat {
+                min-width: 100px;
+                padding: 10px;
+            }
+        }
+
+        body.dark-mode .memory-stat {
+            background: #252525;
+        }
+
+        body.dark-mode .memory-card.flipped,
+        body.dark-mode .memory-card.matched {
+            background: #eeeeee;
+            color: #111;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="memory-page">
+
+        <h1>🧠 Memory Game</h1>
+
+        <p class="memory-subtitle">
+            Match all the pairs using as few moves as possible!
+        </p>
+
+        <div class="memory-stats">
+
+            <div class="memory-stat">
+                Moves
+                <strong id="moves">0</strong>
+            </div>
+
+            <div class="memory-stat">
+                Time
+                <strong id="timer">00:00</strong>
+            </div>
+
+            <div class="memory-stat">
+                Best
+                <strong id="best-score">--</strong>
+            </div>
+
+        </div>
+
+        <div id="memory-board" class="memory-board"></div>
+
+        <div id="memory-message" class="memory-message">
+            Find all 8 pairs!
+        </div>
+
+        <div class="memory-buttons">
+
+            <button id="restart-button" class="memory-button">
+                🔄 New Game
+            </button>
+
+            <button id="reset-best-button" class="memory-button">
+                🗑️ Reset Best
+            </button>
+
+        </div>
+
+        <a href="../index.html" class="memory-back">
+            ← Back to Mini Games Hub
+        </a>
+
+    </main>
+
+    <script src="memory.js"></script>
+
+</body>
+</html>

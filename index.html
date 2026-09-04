@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Mini Games Hub | TahaFarrukh</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <div class="loader-content">
+        <div class="loader-logo">🎮</div>
+        <h1>Mini Games Hub</h1>
+        <p>Loading games...</p>
+
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Menu Button -->
+<button id="menu-button" aria-label="Open Menu">
+    ☰
+</button>
+
+
+<!-- Side Menu -->
+<aside id="side-menu">
+
+    <div class="menu-header">
+        <h2>🎮 Mini Games</h2>
+
+        <button id="close-menu" aria-label="Close Menu">
+            ✕
+        </button>
+    </div>
+
+    <nav>
+
+        <a href="#home">🏠 Home</a>
+
+        <a href="#games">🎮 Games</a>
+
+        <a href="#about">ℹ️ About</a>
+
+        <a href="#how-to-play">📖 How to Play</a>
+
+        <a
+            href="https://github.com/TahaFarrukh-teach"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            🚀 More Games
+        </a>
+
+    </nav>
+
+    <button id="theme-button">
+        🌙 Dark Mode
+    </button>
+
+</aside>
+
+
+<!-- Menu Overlay -->
+<div id="menu-overlay"></div>
+
+
+<!-- Home -->
+<header id="home" class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-icon">🎮</div>
+
+        <h1>Mini Games Hub</h1>
+
+        <p>
+            Play fun and simple games anytime!
+        </p>
+
+        <a href="#games" class="main-button">
+            🎮 Start Playing
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- Games -->
+<section id="games" class="section">
+
+    <div class="section-heading">
+
+        <span>🎮</span>
+
+        <h2>Choose Your Game</h2>
+
+        <p>
+            Pick a game and start playing!
+        </p>
+
+    </div>
+
+
+    <div class="games-grid">
+
+        <!-- Snake -->
+        <a href="games/snake.html" class="game-card">
+
+            <div class="game-icon">🐍</div>
+
+            <h3>Snake</h3>
+
+            <p>
+                Eat the food, grow longer,
+                and beat your high score!
+            </p>
+
+            <div class="game-score">
+                🏆 High Score:
+                <span id="snake-score">0</span>
+            </div>
+
+            <span class="play-button">
+                Play Now →
+            </span>
+
+        </a>
+
+
+        <!-- Tic Tac Toe -->
+        <a href="games/tictactoe.html" class="game-card">
+
+            <div class="game-icon">❌⭕</div>
+
+            <h3>Tic-Tac-Toe</h3>
+
+            <p>
+                Get three in a row before
+                your opponent does!
+            </p>
+
+            <div class="game-score">
+                🏆 Total Wins:
+                <span id="ttt-score">0</span>
+            </div>
+
+            <span class="play-button">
+                Play Now →
+            </span>
+
+        </a>
+
+
+        <!-- Rock Paper Scissors -->
+        <a href="games/rps.html" class="game-card">
+
+            <div class="game-icon">✊</div>
+
+            <h3>Rock Paper Scissors</h3>
+
+            <p>
+                Choose your move and try
+                to defeat the computer!
+            </p>
+
+            <div class="game-score">
+                🏆 Wins:
+                <span id="rps-score">0</span>
+            </div>
+
+            <span class="play-button">
+                Play Now →
+            </span>
+
+        </a>
+
+
+        <!-- Memory -->
+        <a href="games/memory.html" class="game-card">
+
+            <div class="game-icon">🧠</div>
+
+            <h3>Memory Game</h3>
+
+            <p>
+                Find all matching pairs
+                using as few moves as possible!
+            </p>
+
+            <div class="game-score">
+                🏆 Best:
+                <span id="memory-score">--</span>
+            </div>
+
+            <span class="play-button">
+                Play Now →
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- About -->
+<section id="about" class="section about-section">
+
+    <div class="section-heading">
+
+        <span>ℹ️</span>
+
+        <h2>About Mini Games Hub</h2>
+
+    </div>
+
+    <div class="about-box">
+
+        <p>
+            Mini Games Hub is a collection of fun,
+            simple browser games made with
+            HTML, CSS, and JavaScript.
+        </p>
+
+        <p>
+            You can play the games directly in
+            your browser without installing anything.
+        </p>
+
+        <p>
+            Your scores are saved in your browser,
+            so you can try to beat your personal best!
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- How To Play -->
+<section id="how-to-play" class="section">
+
+    <div class="section-heading">
+
+        <span>📖</span>
+
+        <h2>How to Play</h2>
+
+        <p>
+            Quick instructions for every game.
+        </p>
+
+    </div>
+
+
+    <div class="instructions-grid">
+
+        <div class="instruction-card">
+
+            <div>🐍</div>
+
+            <h3>Snake</h3>
+
+            <p>
+                Use the arrow keys or WASD to move.
+                Eat the food and avoid the walls
+                and your own snake.
+            </p>
+
+        </div>
+
+
+        <div class="instruction-card">
+
+            <div>❌⭕</div>
+
+            <h3>Tic-Tac-Toe</h3>
+
+            <p>
+                Take turns placing X and O.
+                The first player to get three
+                in a row wins.
+            </p>
+
+        </div>
+
+
+        <div class="instruction-card">
+
+            <div>✊</div>
+
+            <h3>Rock Paper Scissors</h3>
+
+            <p>
+                Choose Rock, Paper, or Scissors.
+                Rock beats Scissors,
+                Scissors beats Paper,
+                and Paper beats Rock.
+            </p>
+
+        </div>
+
+
+        <div class="instruction-card">
+
+            <div>🧠</div>
+
+            <h3>Memory Game</h3>
+
+            <p>
+                Flip two cards at a time.
+                Find all eight matching pairs
+                using as few moves as possible.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- More Games -->
+<section class="section more-games">
+
+    <div class="section-heading">
+
+        <span>🚀</span>
+
+        <h2>More Games</h2>
+
+        <p>
+            Check out more projects and games
+            on my GitHub.
+        </p>
+
+    </div>
+
+    <a
+        href="https://github.com/TahaFarrukh-teach"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="main-button"
+    >
+        🚀 Visit My GitHub
+    </a>
+
+</section>
+
+
+<!-- Footer -->
+<footer>
+
+    <p>
+        🎮 Mini Games Hub
+    </p>
+
+    <p>
+        Made by: <strong>TahaFarrukh</strong>
+    </p>
+
+    <p class="footer-small">
+        Built with HTML, CSS & JavaScript
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>

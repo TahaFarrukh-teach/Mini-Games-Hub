@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tic-Tac-Toe | Mini Games Hub</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .ttt-page {
+            min-height: 100vh;
+            padding: 80px 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ttt-container {
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+
+        .ttt-container h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .score-box {
+            min-width: 130px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .score-box span {
+            display: block;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .score-box strong {
+            font-size: 25px;
+        }
+
+        .turn {
+            margin-bottom: 18px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .board {
+            width: 330px;
+            max-width: 90vw;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            border: none;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            font-size: 55px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .cell:hover {
+            transform: scale(1.03);
+            background: #f5f3ff;
+        }
+
+        .cell.x {
+            color: #7c3aed;
+        }
+
+        .cell.o {
+            color: #2563eb;
+        }
+
+        .cell.winner {
+            background: #ddd6fe;
+            transform: scale(1.04);
+        }
+
+        .restart-button {
+            margin-top: 25px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 12px;
+            background: #7c3aed;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .restart-button:hover {
+            background: #5b21b6;
+        }
+
+        .reset-score {
+            margin-left: 8px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            background: #475569;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        body.dark .score-box,
+        body.dark .cell {
+            background: #1e293b;
+        }
+
+        body.dark .cell:hover {
+            background: #334155;
+        }
+
+        body.dark .cell.winner {
+            background: #4c1d95;
+        }
+
+        body.dark .subtitle,
+        body.dark .score-box span {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 500px) {
+            .ttt-container h1 {
+                font-size: 36px;
+            }
+
+            .cell {
+                font-size: 45px;
+            }
+
+            .reset-score {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="ttt-page">
+
+        <div class="ttt-container">
+
+            <h1>❌⭕ Tic-Tac-Toe</h1>
+
+            <p class="subtitle">
+                Get three in a row to win!
+            </p>
+
+            <div class="score-board">
+
+                <div class="score-box">
+                    <span>❌ Player X</span>
+                    <strong id="x-score">0</strong>
+                </div>
+
+                <div class="score-box">
+                    <span>⭕ Player O</span>
+                    <strong id="o-score">0</strong>
+                </div>
+
+            </div>
+
+            <div id="turn" class="turn">
+                Player X's Turn
+            </div>
+
+            <div id="board" class="board">
+
+                <button class="cell" data-index="0"></button>
+                <button class="cell" data-index="1"></button>
+                <button class="cell" data-index="2"></button>
+
+                <button class="cell" data-index="3"></button>
+                <button class="cell" data-index="4"></button>
+                <button class="cell" data-index="5"></button>
+
+                <button class="cell" data-index="6"></button>
+                <button class="cell" data-index="7"></button>
+                <button class="cell" data-index="8"></button>
+
+            </div>
+
+            <div id="game-message" class="turn">
+                Player X starts!
+            </div>
+
+            <button id="restart-button" class="restart-button">
+                🔄 New Game
+            </button>
+
+            <button id="reset-score" class="reset-score">
+                🗑️ Reset Scores
+            </button>
+
+            <br>
+
+            <a href="../index.html" class="back-button">
+                ← Back to Mini Games Hub
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="tictactoe.js"></script>
+
+</body>
+</html>

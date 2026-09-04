@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Rock Paper Scissors | Mini Games Hub</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .rps-page {
+            min-height: 100vh;
+            padding: 80px 20px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rps-container {
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .rps-container h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .score-box {
+            min-width: 130px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .score-box span {
+            display: block;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .score-box strong {
+            font-size: 28px;
+        }
+
+        .battle-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .choice-display {
+            width: 150px;
+            min-height: 150px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .choice-display span {
+            display: block;
+            color: #64748b;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .choice-icon {
+            font-size: 65px;
+        }
+
+        .vs {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .result {
+            min-height: 40px;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .choices-title {
+            margin: 30px 0 15px;
+        }
+
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .choice-button {
+            width: 140px;
+            padding: 20px 15px;
+            border: none;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .choice-button:hover {
+            transform: translateY(-6px);
+            background: #f5f3ff;
+        }
+
+        .choice-button .emoji {
+            display: block;
+            font-size: 45px;
+            margin-bottom: 8px;
+        }
+
+        .choice-button strong {
+            font-size: 16px;
+        }
+
+        .game-buttons {
+            margin-top: 30px;
+        }
+
+        .restart-button,
+        .reset-button {
+            padding: 13px 20px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .restart-button {
+            background: #7c3aed;
+        }
+
+        .reset-button {
+            background: #475569;
+        }
+
+        .restart-button:hover {
+            background: #5b21b6;
+        }
+
+        .reset-button:hover {
+            background: #334155;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        body.dark .score-box,
+        body.dark .choice-display,
+        body.dark .choice-button {
+            background: #1e293b;
+        }
+
+        body.dark .choice-button:hover {
+            background: #334155;
+        }
+
+        body.dark .subtitle,
+        body.dark .score-box span,
+        body.dark .choice-display span {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 550px) {
+            .rps-container h1 {
+                font-size: 35px;
+            }
+
+            .battle-area {
+                gap: 10px;
+            }
+
+            .choice-display {
+                width: 125px;
+                min-height: 125px;
+            }
+
+            .choice-icon {
+                font-size: 50px;
+            }
+
+            .vs {
+                font-size: 18px;
+            }
+
+            .choice-button {
+                width: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="rps-page">
+
+        <div class="rps-container">
+
+            <h1>✊📄✌️ Rock Paper Scissors</h1>
+
+            <p class="subtitle">
+                Choose your move and defeat the computer!
+            </p>
+
+
+            <!-- SCORE BOARD -->
+
+            <div class="score-board">
+
+                <div class="score-box">
+                    <span>👤 Your Wins</span>
+                    <strong id="player-score">0</strong>
+                </div>
+
+                <div class="score-box">
+                    <span>🤖 Computer Wins</span>
+                    <strong id="computer-score">0</strong>
+                </div>
+
+                <div class="score-box">
+                    <span>🤝 Draws</span>
+                    <strong id="draw-score">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- BATTLE AREA -->
+
+            <div class="battle-area">
+
+                <div class="choice-display">
+
+                    <span>You</span>
+
+                    <div id="player-choice" class="choice-icon">
+                        ❔
+                    </div>
+
+                </div>
+
+
+                <div class="vs">
+                    VS
+                </div>
+
+
+                <div class="choice-display">
+
+                    <span>Computer</span>
+
+                    <div id="computer-choice" class="choice-icon">
+                        ❔
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div id="result" class="result">
+                Choose your move!
+            </div>
+
+
+            <h3 class="choices-title">
+                Choose One
+            </h3>
+
+
+            <!-- CHOICES -->
+
+            <div class="choices">
+
+                <button
+                    class="choice-button"
+                    data-choice="rock">
+
+                    <span class="emoji">✊</span>
+
+                    <strong>Rock</strong>
+
+                </button>
+
+
+                <button
+                    class="choice-button"
+                    data-choice="paper">
+
+                    <span class="emoji">📄</span>
+
+                    <strong>Paper</strong>
+
+                </button>
+
+
+                <button
+                    class="choice-button"
+                    data-choice="scissors">
+
+                    <span class="emoji">✌️</span>
+
+                    <strong>Scissors</strong>
+
+                </button>
+
+            </div>
+
+
+            <!-- GAME BUTTONS -->
+
+            <div class="game-buttons">
+
+                <button
+                    id="restart-button"
+                    class="restart-button">
+
+                    🔄 New Round
+
+                </button>
+
+
+                <button
+                    id="reset-button"
+                    class="reset-button">
+
+                    🗑️ Reset Scores
+
+                </button>
+
+            </div>
+
+
+            <a href="../index.html" class="back-button">
+                ← Back to Mini Games Hub
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script src="rps.js"></script>
+
+</body>
+</html>
